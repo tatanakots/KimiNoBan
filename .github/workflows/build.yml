@@ -31,6 +31,7 @@ jobs:
 
       - name: Set artifact path
         id: set-artifact-path
+        shell: bash
         run: |
             if [[ "${{ matrix.os }}" == "macos-latest" ]]; then
                 echo "artifact_path=dist-electron/*.dmg" >> $GITHUB_OUTPUT
