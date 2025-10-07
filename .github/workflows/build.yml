@@ -1,0 +1,51 @@
+name: Build Electron App
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, windows-latest, ubuntu-latest]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 22.20.0
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Vite project
+        run: npm run build
+
+      - name: Build Electron app
+        run: npm run build
+
+      - name: Set artifact path
+        id: set-artifact-path
+        run: |
+          if [[ "${{ matrix.os }}" == "macos-latest" ]]; then
+            echo "artifact_path=dist-electron/*.dmg" >> $GITHUB_OUTPUT
+          elif [[ "${{ matrix.os }}" == "windows-latest" ]]; then
+            echo "artifact_path=dist-electron/*Setup*.exe" >> $GITHUB_OUTPUT
+          else
+            # Linux 使用 AppImage
+            echo "artifact_path=dist-electron/*.AppImage" >> $GITHUB_OUTPUT
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: KimiNoBan-${{ matrix.os }}
+          path: ${{ steps.set-artifact-path.outputs.artifact_path }}
