@@ -1,5 +1,11 @@
-# Vue 3 + TypeScript + Vite
+# 君の番
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+跨平台的随机点名应用程序，基于electron。
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+## 使用方法
+
+在[Actions](https://github.com/tatanakots/KimiNoBan/actions)中下载预编译包并安装即可。
+
+## 常见问题
+
+ - [在macOS中无法打开？](/docs/macos-cannot-open-app.md)
